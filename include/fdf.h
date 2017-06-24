@@ -11,13 +11,20 @@
 /* ************************************************************************** */
 
 #ifndef FDF_H
-#define FDF_PH
+#define FDF_H
 
-#include "../libft/libft.h"
+#include "../libft/includes/libft.h"
 #include <math.h>
 #include <stdio.h>  	//perror
 #include <string.h> 	//strerror
+#include "../minilibx_macos/mlx.h"
 
-
+typedef struct		s_fdf
+{
+	void 			*mlx;
+	void 			*win;
+	int				x;
+	int				y;
+}					t_fdf;
 
 #endif
