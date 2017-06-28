@@ -21,9 +21,9 @@ LIB_PATH		= 	./libft/
 LIB				=	./libft/libft.a
 LIB_LINK		=	./libft/libft.a
 
-INC_PATH		= 	./include
+INC_PATH		= 	./includes
 SRC_PATH		=	./src
-SRC_NAME 		= 	fdf.c error.c parser.c
+SRC_NAME 		= 	fdf.c error.c parser.c ft_utility.c  
 OBJ_PATH		=	./obj
 
 OBJ_NAME		=	$(SRC_NAME:.c=.o)

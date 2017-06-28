@@ -149,6 +149,9 @@ int					ft_isupper(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 
+int					ft_min(int a, int b);
+int					ft_max(int a, int b);
+
 char				*ft_itoa_base(long long int value, int base);
 int					nblen(long long int value, int base);
 char				*ft_uitoa_base(unsigned long long int value, int base);

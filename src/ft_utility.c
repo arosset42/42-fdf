@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   ft_utility.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arosset <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/26 14:37:58 by arosset           #+#    #+#             */
-/*   Updated: 2017/06/26 14:38:01 by arosset          ###   ########.fr       */
+/*   Created: 2017/06/28 21:15:00 by arosset           #+#    #+#             */
+/*   Updated: 2017/06/28 21:15:22 by arosset          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include <stdio.h>
 
-int		main(int ac, char **av)
+void	get_center(t_win *screen)
 {
-	t_win	*screen;
-	t_map	*map;
+	t_point	p;
+	int		x;
+	int		y;
 
-	if (ac == 2)
-	{
-		if (!(screen = (t_win *)malloc(sizeof(t_win))))
-			ft_error(4, 0);
-		map = ft_parse_map(av[1], 0, NULL);
-		if (map->len == 0 || map->lines[0]->len == 0)
-			ft_error(3, 0);
-		printf("len = %d, min %f, max %f, mid %f\n", map->len, map->min, map->max, map->mid);
-		screen->map = map;
-		get_center(screen);
-	}
-	else
-		ft_error(1, 0);
-	return (0);
+	p = screen->center;
+	y = screen->map->len;
+	x = screen->map->lines[y - 1]->len;
+	p.x = (screen->map->lines[y - 1]->points[x - 1]->x +
+			screen->map->lines[0]->points[0]->x) / 2;
+	p.y = (screen->map->lines[y - 1]->points[x - 1]->y +
+			screen->map->lines[0]->points[0]->y) / 2;
+	screen->center = p;
 }

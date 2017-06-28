@@ -10,64 +10,107 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
+#include "../includes/fdf.h"
+#include <stdio.h>
 
-static void 	set_pts(char *line, t_fdf *fdf)
-{
-	static	int		i;
-	int				j;
-	char			**tab;
-
-	j = 0;
-	tab = ft_strsplit(line, ' ');
-	while (tab[j])
-	{
-		ft_printf("tab[%d] = %s\n", j, tab[j]);
-		// fdf->pts[i][j] = ft_atoi(tab[j]);
-		// ft_printf("x = %d, y = %d, z = %d\n", fdf->pts[i], fdf->pts[i][j], fdf->pts[i][j][0]);
-		j++;
-	}
-	i++;
-}
-
-static int 	check_line(char *line)
+static void	ft_get_min_max(t_map *map)
 {
 	int		i;
+	int		j;
+	int		k;
+	double	tmin;
+	double	tmax;
 
-	i = 0;
-	while (line[i])
+	i = -1;
+	while (++i < map->len)
 	{
-		if (line[i] == ' ')
-			i++;
-		else if (ft_isdigit(line[i]))
-			i++;
-		else if (line[i] == '-' && ft_isdigit(line[i + 1]) &&
-					(line[i - 1] == ' ' || i == 0))
-			i++;
-		else
-			return (0);
+		j = -1;
+		while (++j < map->lines[i]->len - 1)
+		{
+			k = j;
+			while (++k < map->lines[i]->len)
+			{
+				tmin = ft_min(map->lines[i]->points[j]->z / SIZE_ALT,
+						map->lines[i]->points[k]->z / SIZE_ALT);
+				tmax = ft_max(map->lines[i]->points[j]->z / SIZE_ALT,
+						map->lines[i]->points[k]->z / SIZE_ALT);
+				map->min = ft_min(tmin, map->min);
+				map->max = ft_max(tmax, map->max);
+				map->mid = (map->min + map->max) / 2;
+			}
+		}
 	}
-	return (1);
 }
 
-char 	*read_check(char *av, t_fdf *fdf)
+static int 	ft_points(char *line, int nb_line, t_point ***array_points)
+{
+	char	**str_array;
+	t_point	*point;
+	int		i;
+
+	str_array = ft_strsplit(line, ' ');
+	i = 0;
+	while (str_array[i] != 0)
+		i++;
+	if (!((*array_points) = (t_point **)malloc(sizeof(t_point) * i)))
+		ft_error(4, 0);
+	i = 0;
+	while (str_array[i] != 0)
+	{
+		if (!(point = (t_point *)malloc(sizeof(t_point))))
+			ft_error(4, 0);
+		point->x = i * SIZE_W;
+		point->y = nb_line * SIZE_H;
+		point->color = ft_atoi(str_array[i]);
+		point->z = (point->color) * SIZE_ALT;
+		(*array_points)[i] = point;
+		i++;
+	}
+	return (i);
+}
+
+static int 	ft_nb_line(char *av)
 {
 	int		fd;
-	int		ret;
-	char	*line;
+	int		nb_line;
+	char 	buf;
 
-	line = NULL;
-	fdf->dx = 1;
-	if ((fd = open(av, O_RDONLY)) == -1)
-		ft_error(2);
-	while ((ret = get_next_line(fd, &line)) > 0)
+	nb_line = 0;
+	if ((fd = open(av, O_RDONLY)) < 0)
+		ft_error(2, av);
+	while (read(fd, &buf, 1))
 	{
-		if (!(check_line(line)))
-			ft_error(3);
-		set_pts(line, fdf);
-		break;
+		if (buf == '\n')
+		nb_line++;
 	}
-	if (ret == -1)
-		ft_error(42);
-	return ("ok");
+	close(fd);
+	return (nb_line);
+}
+
+t_map 	*ft_parse_map(char *av, int fd, char *line)
+{
+	t_map	*map;
+	int		count;
+	t_line	*row;
+	t_point	**pts;
+
+	count = 0;
+	if (!(map = (t_map *)ft_memalloc(sizeof(t_map))) ||
+		!(map->lines = (t_line **)malloc(sizeof(t_line) * ft_nb_line(av))))
+		ft_error(4, 0);
+	map->len = 0;
+	if ((fd = open(av, O_RDONLY)) > 0)
+	{
+		while ((get_next_line(fd, &line)) > 0)
+		{
+			if (!(row = (t_line *)malloc(sizeof(t_line))))
+				ft_error(4, 0);
+			row->len = ft_points(line, count, &pts);
+			row->points = pts;
+			map->lines[count++] = row;
+		}
+		map->len = count;
+		ft_get_min_max(map);
+	}
+	return (map);
 }

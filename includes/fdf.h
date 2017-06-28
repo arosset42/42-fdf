@@ -22,19 +22,56 @@
 #include <string.h> 	//strerror
 #include "../minilibx_macos/mlx.h"
 
+/*
+** M_PI = 3.141593
+*/
 
+# define SIZE_W 20
+# define SIZE_H 20
+# define SIZE_ALT 5
 
-typedef struct		s_fdf
+typedef struct	s_point
 {
-	void 			*mlx;
-	void 			*win;
-	int				dx;
-	int				dy;
-	int				***pts;
-}					t_fdf;
+	double		x;
+	double		y;
+	double		z;
+	int			color;
+}				t_point;
 
+typedef struct	s_line
+{
+	t_point		**points;
+	int			len;
+}				t_line;
 
-void 	ft_error(int c);
-char 	*read_check(char *av, t_fdf *fdf);
+typedef struct	s_map
+{
+	t_line		**lines;
+	int			len;
+	double		min;
+	double		max;
+	double		mid;
+}				t_map;
+
+typedef struct	s_window
+{
+	void		*mlx;
+	void		*win;
+	t_map		*map;
+	void		*img;
+	t_point		center;
+	int			**color;
+	int			cnum;
+	double		scale;
+	char		*img_addr;
+	int			bits;
+	int			size;
+	int			endian;
+}				t_win;
+
+void 	ft_error(int c, char *s);
+t_map 	*ft_parse_map(char *av, int fd, char *line);
+
+void	get_center(t_win *screen);
 
 #endif
