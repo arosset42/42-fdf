@@ -33,8 +33,8 @@ void 	ft_cat(t_win *win)
 		}
 		j++;
 	}
-	win->foot = mlx_xpm_file_to_image(win->mlx, "ms.xpm", &x, &y);
-	mlx_put_image_to_window(win->mlx, win->win, win->foot, WIN_W - 100, WIN_H - 100);
+	win->foot = mlx_xpm_file_to_image(win->mlx, "42_MS_2.xpm", &x, &y);
+	mlx_put_image_to_window(win->mlx, win->win, win->foot, WIN_W - 110, WIN_H - 100);
 }
 
 int		main(int ac, char **av)
