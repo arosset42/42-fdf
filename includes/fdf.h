@@ -26,6 +26,9 @@
 ** M_PI = 3.141593
 */
 
+# define WIN_W 800
+# define WIN_H 600
+
 # define SIZE_W 20
 # define SIZE_H 20
 # define SIZE_ALT 5
@@ -59,6 +62,7 @@ typedef struct	s_window
 	void		*win;
 	t_map		*map;
 	void		*img;
+	void 		*foot;
 	t_point		center;
 	int			**color;
 	int			cnum;
@@ -80,5 +84,6 @@ int		ft_key_hook(int keycode, t_win *screen);
 
 void 	ft_draw(t_win *screen);
 int		ft_draw_line(int x1, int y1, int x2, int y2, t_win *screen);
+void 	ft_cat(t_win *win);
 
 #endif

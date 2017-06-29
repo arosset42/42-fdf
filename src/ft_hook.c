@@ -28,6 +28,7 @@ int		ft_key_hook(int keycode, t_win *screen)
 	ft_printf("dx = %d, dy = %d\n", screen->dx, screen->dy);
 	mlx_clear_window(screen->mlx, screen->win);
 	ft_draw(screen);
+	ft_cat(screen);
 	ft_printf("keycode = %d\n", keycode);
 	return (1);
 }

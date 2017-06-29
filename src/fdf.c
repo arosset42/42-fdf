@@ -13,13 +13,37 @@
 #include "../includes/fdf.h"
 #include <stdio.h>
 
+void 	ft_cat(t_win *win)
+{
+	int		x;
+	int		y;
+	int		i;
+	int		j;
+
+	x = 0;
+	y = 0;
+	j = WIN_H - 100;
+	while (j <= WIN_H)
+	{
+		i = 0;
+		while (i <= WIN_W)
+		{
+			mlx_pixel_put(win->mlx, win->win, i, j, 0x2e8f97);
+			i++;
+		}
+		j++;
+	}
+	win->foot = mlx_xpm_file_to_image(win->mlx, "ms.xpm", &x, &y);
+	mlx_put_image_to_window(win->mlx, win->win, win->foot, WIN_W - 100, WIN_H - 100);
+}
+
 int		main(int ac, char **av)
 {
 	t_win	*screen;
 	t_map	*map;
 
 
-	if (ac == 2)
+	if (ac != 1)
 	{
 		if (!(screen = (t_win *)malloc(sizeof(t_win))))
 			ft_error(4, 0);
@@ -32,9 +56,10 @@ int		main(int ac, char **av)
 		screen->dx = screen->center.x;
 		screen->dy = screen->center.y;
 		screen->mlx = mlx_init();
-		screen->win = mlx_new_window(screen->mlx, 800, 800, "42 TEST");
+		screen->win = mlx_new_window(screen->mlx, WIN_W, WIN_H, "42 TEST");
 		printf("TEST1\n");
 		ft_draw(screen);
+		ft_cat(screen);
 		mlx_key_hook(screen->win, ft_key_hook, screen);
 		mlx_loop(screen->mlx);
 		printf("center : x = %f, y = %f\n", screen->center.x, screen->center.y);
