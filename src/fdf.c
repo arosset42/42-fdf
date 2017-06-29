@@ -18,6 +18,7 @@ int		main(int ac, char **av)
 	t_win	*screen;
 	t_map	*map;
 
+
 	if (ac == 2)
 	{
 		if (!(screen = (t_win *)malloc(sizeof(t_win))))
@@ -28,6 +29,15 @@ int		main(int ac, char **av)
 		printf("len = %d, min %f, max %f, mid %f\n", map->len, map->min, map->max, map->mid);
 		screen->map = map;
 		get_center(screen);
+		screen->dx = screen->center.x;
+		screen->dy = screen->center.y;
+		screen->mlx = mlx_init();
+		screen->win = mlx_new_window(screen->mlx, 800, 800, "42 TEST");
+		printf("TEST1\n");
+		ft_draw(screen);
+		mlx_key_hook(screen->win, ft_key_hook, screen);
+		mlx_loop(screen->mlx);
+		printf("center : x = %f, y = %f\n", screen->center.x, screen->center.y);
 	}
 	else
 		ft_error(1, 0);

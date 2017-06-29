@@ -67,11 +67,18 @@ typedef struct	s_window
 	int			bits;
 	int			size;
 	int			endian;
+	int			dx;
+	int			dy;
 }				t_win;
 
 void 	ft_error(int c, char *s);
 t_map 	*ft_parse_map(char *av, int fd, char *line);
 
 void	get_center(t_win *screen);
+
+int		ft_key_hook(int keycode, t_win *screen);
+
+void 	ft_draw(t_win *screen);
+int		ft_draw_line(int x1, int y1, int x2, int y2, t_win *screen);
 
 #endif
