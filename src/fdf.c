@@ -53,8 +53,8 @@ int		main(int ac, char **av)
 		printf("len = %d, min %f, max %f, mid %f\n", map->len, map->min, map->max, map->mid);
 		screen->map = map;
 		get_center(screen);
-		screen->dx = screen->center.x;
-		screen->dy = screen->center.y;
+		// screen->dx = screen->center.x;
+		// screen->dy = screen->center.y;
 		screen->mlx = mlx_init();
 		screen->win = mlx_new_window(screen->mlx, WIN_W, WIN_H, "42 TEST");
 		printf("TEST1\n");
