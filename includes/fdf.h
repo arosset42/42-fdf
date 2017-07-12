@@ -26,12 +26,12 @@
 ** M_PI = 3.141593
 */
 
-# define WIN_W 1280
-# define WIN_H 960
+# define WIN_W 600
+# define WIN_H 600
 
-# define SIZE_W 40
-# define SIZE_H 40
-# define SIZE_ALT 10
+# define SIZE_W 20
+# define SIZE_H 20
+# define SIZE_ALT 5
 
 typedef struct	s_point
 {
@@ -63,6 +63,7 @@ typedef struct	s_window
 	t_map		*map;
 	void		*img;
 	void 		*foot;
+	void 		*bordel;
 	t_point		center;
 	int			**color;
 	int			cnum;
@@ -79,10 +80,11 @@ void 	ft_error(int c, char *s);
 t_map 	*ft_parse_map(char *av, int fd, char *line);
 
 void	get_center(t_win *screen);
+void 	ft_init_win(t_win *screen, int x, int y, char *name);
 
 int		ft_key_hook(int keycode, t_win *screen);
 
-void 	ft_draw(t_win *screen);
+int		ft_draw(t_win *screen);
 int		ft_draw_line(t_point *p1, t_point *p2, t_win *screen);
 void 	ft_cat(t_win *win);
 

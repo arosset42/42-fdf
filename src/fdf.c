@@ -22,19 +22,24 @@ void 	ft_cat(t_win *win)
 
 	x = 0;
 	y = 0;
-	j = WIN_H - 100;
+	j = 0;//WIN_H - 100;
 	while (j <= WIN_H)
 	{
 		i = 0;
 		while (i <= WIN_W)
 		{
-			mlx_pixel_put(win->mlx, win->win, i, j, 0x2e8f97);
+			if (j >= WIN_H - 100)
+				mlx_pixel_put(win->mlx, win->win, i, j, 0x2e8f97);
+			//else
+				//mlx_pixel_put(win->mlx, win->win, i, j, 0xFFFFFF);
 			i++;
 		}
 		j++;
 	}
 	win->foot = mlx_xpm_file_to_image(win->mlx, "42_MS_2.xpm", &x, &y);
 	mlx_put_image_to_window(win->mlx, win->win, win->foot, WIN_W - 110, WIN_H - 100);
+	win->bordel = mlx_xpm_file_to_image(win->mlx, "test.xpm", &x, &y);
+	mlx_put_image_to_window(win->mlx, win->win, win->bordel,00, 00);
 }
 
 int		main(int ac, char **av)
@@ -43,7 +48,7 @@ int		main(int ac, char **av)
 	t_map	*map;
 
 
-	if (ac != 1)
+	if (ac == 2)
 	{
 		if (!(screen = (t_win *)malloc(sizeof(t_win))))
 			ft_error(4, 0);
@@ -53,16 +58,12 @@ int		main(int ac, char **av)
 		printf("len = %d, min %f, max %f, mid %f\n", map->len, map->min, map->max, map->mid);
 		screen->map = map;
 		get_center(screen);
-		// screen->dx = screen->center.x;
-		// screen->dy = screen->center.y;
-		screen->mlx = mlx_init();
-		screen->win = mlx_new_window(screen->mlx, WIN_W, WIN_H, "42 TEST");
-		printf("TEST1\n");
-		ft_draw(screen);
+		ft_init_win(screen, WIN_W, WIN_H, "42 FDF");
+		printf("Start draw\n");
 		ft_cat(screen);
+		mlx_expose_hook(screen->win, ft_draw, screen);
 		mlx_key_hook(screen->win, ft_key_hook, screen);
 		mlx_loop(screen->mlx);
-		printf("center : x = %f, y = %f\n", screen->center.x, screen->center.y);
 	}
 	else
 		ft_error(1, 0);

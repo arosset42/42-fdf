@@ -64,7 +64,8 @@ $(LIB):
 	@make -C $(LIB_PATH)
 	@make -C $(LIB_MLX)
 
-
+test: all
+	./fdf maps/42.fdf
 
 clean:
 	@rm -rf $(OBJ) $(OBJ_PATH)

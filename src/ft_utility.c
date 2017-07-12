@@ -27,3 +27,9 @@ void	get_center(t_win *screen)
 			screen->map->lines[0]->points[0]->y) / 2;
 	screen->center = p;
 }
+
+void 	ft_init_win(t_win *screen, int x, int y, char *name)
+{
+	screen->mlx = mlx_init();
+	screen->win = mlx_new_window(screen->mlx, x, y, name);
+}
