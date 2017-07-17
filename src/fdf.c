@@ -13,6 +13,10 @@
 #include "../includes/fdf.h"
 #include <stdio.h>
 
+/*
+** void 	ft_mlx_draw_foot(t_win *param, char *name_prgm, int win_h, int win_w)
+*/
+
 void 	ft_cat(t_win *win)
 {
 	int		x;
@@ -29,17 +33,17 @@ void 	ft_cat(t_win *win)
 		while (i <= WIN_W)
 		{
 			if (j >= WIN_H - 100)
-				mlx_pixel_put(win->mlx, win->win, i, j, 0x2e8f97);
-			//else
-				//mlx_pixel_put(win->mlx, win->win, i, j, 0xFFFFFF);
+				mlx_pixel_put(win->mlx, win->win, i, j, BLEUVERT);
+			// else
+			// 	mlx_pixel_put(win->mlx, win->win, i, j, WHITE);
 			i++;
 		}
 		j++;
 	}
 	win->foot = mlx_xpm_file_to_image(win->mlx, "42_MS_2.xpm", &x, &y);
 	mlx_put_image_to_window(win->mlx, win->win, win->foot, WIN_W - 110, WIN_H - 100);
-	win->bordel = mlx_xpm_file_to_image(win->mlx, "test.xpm", &x, &y);
-	mlx_put_image_to_window(win->mlx, win->win, win->bordel,00, 00);
+	// win->bordel = mlx_xpm_file_to_image(win->mlx, "test.xpm", &x, &y);
+	// mlx_put_image_to_window(win->mlx, win->win, win->bordel, -10, 00);
 }
 
 int		main(int ac, char **av)

@@ -22,6 +22,8 @@
 #include <string.h> 	//strerror
 #include "../minilibx_macos/mlx.h"
 
+#include "color_rgb.h"
+
 /*
 ** M_PI = 3.141593
 */
@@ -72,8 +74,6 @@ typedef struct	s_window
 	int			bits;
 	int			size;
 	int			endian;
-	// int			dx;
-	// int			dy;
 }				t_win;
 
 void 	ft_error(int c, char *s);

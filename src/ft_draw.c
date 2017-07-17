@@ -47,7 +47,7 @@ int		ft_draw_line(t_point *p1, t_point *p2, t_win *screen)
 	x2 = tmp_x + dec;
 	y2 = tmp_y + dec;
 	printf("\033[33m x1 = %f, y1 =%f z1 = %f ",p1->x ,p1->y, p1->z );
-	printf("\033[32m x2 = %f, y2 =%f z2 = %f \033[00m",p2->x ,p2->y, p2->z );
+	printf("\033[32m x2 = %f, y2 =%f z2 = %f ",p2->x ,p2->y, p2->z );
 	printf("\033[31m tmp_x = %f, tmp_y =%f \033[00m\n",tmp_x ,tmp_y );
 	printf("x1 = %d x2 = %d, y1 = %d, y2 = %d x = %d\n",x1, x2, y1, y2, x);
 	while (x <= x2)
