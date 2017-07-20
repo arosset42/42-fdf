@@ -64,8 +64,6 @@ typedef struct	s_window
 	void		*win;
 	t_map		*map;
 	void		*img;
-	void 		*foot;
-	void 		*bordel;
 	t_point		center;
 	int			**color;
 	int			cnum;
