@@ -42,7 +42,7 @@ void	draw_point(t_point *point, t_win *screen, int color)
 	if (out_window(point) == 1)
 	{
 		ft_memcpy(&(screen->img_addr[((int)(point->x) * 4) +
-					((int)(point->y) * screen->size)]),
+					((int)(point->y) * screen->size) + 8]),
 				&(color), (size_t)(sizeof(int)));
 	}
 }
@@ -105,7 +105,7 @@ void	draw_map(t_win *scr)
 			if (scr->map->lines[y + 1] && y + 1 < scr->map->len)
 			{
 				//printf("Testing to see if point below exists...\n");
-				if (scr->map->lines[y + 1]->points[x] && x <= scr->map->lines[y + 1]->len) 
+				if (scr->map->lines[y + 1]->points[x] && x <= scr->map->lines[y + 1]->len)
 				{
 					//printf("and (%f, %f, %f)\n", scr->map->lines[y+1]->points[x]->x, scr->map->lines[y+1]->points[x]->y, scr->map->lines[y+1]->points[x]->z);
 					draw_line(p1, (*scr->map->lines[y + 1]->points[x]), scr);

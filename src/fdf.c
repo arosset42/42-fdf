@@ -30,7 +30,9 @@ int		main(int ac, char **av)
 		 			map->len, map->min, map->max, map->mid);
 		screen->map = map;
 		get_center(screen);
+		printf("center x %f, center y %f\n", screen->center.x, screen->center.y);
 		ft_init_win(screen, WIN_W, WIN_H, "42 FDF");
+		adapt_map(screen);
 		printf("Start draw\n");
 		mlx_expose_hook(screen->win, ft_draw, screen);
 		mlx_key_hook(screen->win, ft_key_hook, screen);

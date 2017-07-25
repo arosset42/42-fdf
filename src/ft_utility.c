@@ -33,3 +33,38 @@ void 	ft_init_win(t_win *screen, int x, int y, char *name)
 	screen->mlx = mlx_init();
 	screen->win = mlx_new_window(screen->mlx, x, y, name);
 }
+
+/*
+** if (!(point->x > WIN_W + SHIFT_DIST || point->x <= 0 || point->y > WIN_H + SHIFT_DIST || point->y <= 0))
+*/
+
+int		ft_out_window(t_point *point)
+{
+	if (!(point->x > WIN_W || point->x <= 0 || point->y > WIN_H || point->y <= 0))
+		return (1);
+	else
+		return (0);
+}
+
+void 	adapt_map(t_win *screen)
+{
+	int		w;
+	int		h;
+	double	s;
+
+	w = (WIN_W) / 2;
+	h = (WIN_H) / 2;
+	if (screen->center.x == 0)
+		screen->center.x = 10;
+	if (screen->center.y == 0)
+		screen->center.y = 10;
+	if (((screen->center.y) / (screen->center.x)) <= (WIN_H / WIN_W))
+		s = w / (screen->center.x);
+	else
+		s = h / (screen->center.y);
+	calc_shift(screen, -screen->center.x + w, -screen->center.y + h, 0);
+	calc_scale(screen, s);
+	calc_rotation(screen, M_PI / 15, 'z');
+	calc_rotation(screen, M_PI / 5, 'x');
+	screen->scale = s;
+}
