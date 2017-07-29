@@ -12,7 +12,7 @@
 
 #include "../includes/fdf.h"
 
-void	calc_point(t_point *p, t_matrix *m, t_win *screen)
+void	calc_point(t_point *p, t_matrice *m, t_win *screen)
 {
 	double	tmp_x;
 	double	tmp_y;
@@ -30,7 +30,7 @@ void	calc_point(t_point *p, t_matrix *m, t_win *screen)
 	p->y += screen->center.y;
 }
 
-void	calc_all_points(t_matrix *m, t_win *screen)
+void	calc_all_points(t_matrice *m, t_win *screen)
 {
 	int	x;
 	int	y;
@@ -50,23 +50,23 @@ void	calc_all_points(t_matrix *m, t_win *screen)
 
 void	calc_rotation(t_win *screen, double rot, char axis)
 {
-	t_matrix	*m_rot;
+	t_matrice	*m_rot;
 
 	if (axis == 'x')
-		m_rot = matrix_rotation_x(rot);
+		m_rot = matrice_rotation_x(rot);
 	else if (axis == 'y')
-		m_rot = matrix_rotation_y(rot);
+		m_rot = matrice_rotation_y(rot);
 	else
-		m_rot = matrix_rotation_z(rot);
+		m_rot = matrice_rotation_z(rot);
 	calc_all_points(m_rot, screen);
 	free(m_rot);
 }
 
 void	calc_shift(t_win *screen, double x, double y, double z)
 {
-	t_matrix	*m_shift;
+	t_matrice	*m_shift;
 
-	m_shift = matrix_shift(x, y, z);
+	m_shift = matrice_shift(x, y, z);
 	calc_all_points(m_shift, screen);
 	get_center(screen);
 	free(m_shift);
@@ -74,9 +74,9 @@ void	calc_shift(t_win *screen, double x, double y, double z)
 
 void	calc_scale(t_win *screen, double scale)
 {
-	t_matrix	*m_scale;
+	t_matrice	*m_scale;
 
-	m_scale = matrix_scale(scale);
+	m_scale = matrice_scale(scale);
 	calc_all_points(m_scale, screen);
 	free(m_scale);
 }

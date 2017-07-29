@@ -18,24 +18,23 @@ int		main(int ac, char **av)
 	t_win	*screen;
 	t_map	*map;
 
-
 	if (ac == 2)
 	{
 		if (!(screen = (t_win *)malloc(sizeof(t_win))))
 			ft_error(4, 0);
+
 		map = ft_parse_map(av[1], 0, NULL);
 		if (map->len == 0 || map->lines[0]->len == 0)
 			ft_error(3, 0);
-		printf("len = %d, min %f, max %f, mid %f\n",
-		 			map->len, map->min, map->max, map->mid);
 		screen->map = map;
 		get_center(screen);
-		printf("center x %f, center y %f\n", screen->center.x, screen->center.y);
-		ft_init_win(screen, WIN_W, WIN_H, "42 FDF");
+		printf("Color\n");
+		screen->color = choose_color();
+		screen->cnum = 0;
+		ft_init_win(screen, WIN_W, WIN_H, "Arosset 42 FDF");
 		adapt_map(screen);
-		printf("Start draw\n");
 		mlx_expose_hook(screen->win, ft_draw, screen);
-		mlx_key_hook(screen->win, ft_key_hook, screen);
+		mlx_hook(screen->win, 2, 3, ft_key_hook, screen);
 		mlx_loop(screen->mlx);
 	}
 	else

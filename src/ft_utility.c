@@ -34,13 +34,10 @@ void 	ft_init_win(t_win *screen, int x, int y, char *name)
 	screen->win = mlx_new_window(screen->mlx, x, y, name);
 }
 
-/*
-** if (!(point->x > WIN_W + SHIFT_DIST || point->x <= 0 || point->y > WIN_H + SHIFT_DIST || point->y <= 0))
-*/
-
 int		ft_out_window(t_point *point)
 {
-	if (!(point->x > WIN_W || point->x <= 0 || point->y > WIN_H || point->y <= 0))
+	if (!(point->x > WIN_W + SHIFT_DIST || point->x <= 0 ||
+		 	point->y > WIN_H + SHIFT_DIST || point->y <= 0))
 		return (1);
 	else
 		return (0);

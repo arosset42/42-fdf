@@ -12,11 +12,11 @@
 
 #include "../includes/fdf.h"
 
-t_matrix	*matrix_rotation_x(double theta)
+t_matrice	*matrice_rotation_x(double theta)
 {
-	t_matrix	*m;
+	t_matrice	*m;
 
-	if (!(m = (t_matrix *)ft_memalloc(sizeof(t_matrix))))
+	if (!(m = (t_matrice *)ft_memalloc(sizeof(t_matrice))))
 		ft_error(4, 0);
 	m->x1 = 1;
 	m->y2 = cos(theta);
@@ -26,11 +26,11 @@ t_matrix	*matrix_rotation_x(double theta)
 	return (m);
 }
 
-t_matrix	*matrix_rotation_y(double theta)
+t_matrice	*matrice_rotation_y(double theta)
 {
-	t_matrix	*m;
+	t_matrice	*m;
 
-	if (!(m = (t_matrix *)ft_memalloc(sizeof(t_matrix))))
+	if (!(m = (t_matrice *)ft_memalloc(sizeof(t_matrice))))
 		ft_error(4, 0);
 	m->x1 = cos(theta);
 	m->x3 = sin(theta);
@@ -40,11 +40,11 @@ t_matrix	*matrix_rotation_y(double theta)
 	return (m);
 }
 
-t_matrix	*matrix_rotation_z(double theta)
+t_matrice	*matrice_rotation_z(double theta)
 {
-	t_matrix	*m;
+	t_matrice	*m;
 
-	if (!(m = (t_matrix *)ft_memalloc(sizeof(t_matrix))))
+	if (!(m = (t_matrice *)ft_memalloc(sizeof(t_matrice))))
 		ft_error(4, 0);
 	m->x1 = cos(theta);
 	m->x2 = -sin(theta);
@@ -54,11 +54,11 @@ t_matrix	*matrix_rotation_z(double theta)
 	return (m);
 }
 
-t_matrix	*matrix_shift(double tx, double ty, double tz)
+t_matrice	*matrice_shift(double tx, double ty, double tz)
 {
-	t_matrix	*m;
+	t_matrice	*m;
 
-	if (!(m = (t_matrix *)ft_memalloc(sizeof(t_matrix))))
+	if (!(m = (t_matrice *)ft_memalloc(sizeof(t_matrice))))
 		ft_error(4, 0);
 	m->x4 = tx;
 	m->y4 = ty;
@@ -69,11 +69,11 @@ t_matrix	*matrix_shift(double tx, double ty, double tz)
 	return (m);
 }
 
-t_matrix	*matrix_scale(double scale)
+t_matrice	*matrice_scale(double scale)
 {
-	t_matrix	*m;
+	t_matrice	*m;
 
-	if (!(m = (t_matrix *)ft_memalloc(sizeof(t_matrix))))
+	if (!(m = (t_matrice *)ft_memalloc(sizeof(t_matrice))))
 		ft_error(4, 0);
 	m->x1 = scale;
 	m->y2 = scale;

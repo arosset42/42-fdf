@@ -60,6 +60,24 @@ void 	ft_key_hook_scale(int keycode, t_win *screen)
 	}
 }
 
+void	key_hook_color(int keycode, t_win *screen)
+{
+	if (keycode == KEY_COLOR_U)
+	{
+		if (screen->cnum < THEMES - 1)
+			screen->cnum++;
+		else
+			screen->cnum = 0;
+	}
+	else if (keycode == KEY_COLOR_D)
+	{
+		if (screen->cnum > 0)
+			screen->cnum--;
+		else
+			screen->cnum = THEMES - 1;
+	}
+}
+
 int		ft_key_hook(int keycode, t_win *screen)
 {
 	if (keycode == KEY_ESC)
@@ -70,7 +88,7 @@ int		ft_key_hook(int keycode, t_win *screen)
 	ft_key_hook_rotation(keycode, screen);
 	ft_key_hook_shift(keycode, screen);
 	ft_key_hook_scale(keycode, screen);
-//	key_hook_color(keycode, screen);
+	key_hook_color(keycode, screen);
 	ft_printf("keycode = %d\n", keycode);
 	ft_draw(screen);
 	return (1);

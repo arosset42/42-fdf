@@ -12,7 +12,7 @@
 
 #include "../includes/fdf.h"
 
-static 	void 	ft_draw_point(t_point *point, t_win *screen, int color)
+void 	ft_draw_point(t_point *point, t_win *screen, int color)
 {
 	if (ft_out_window(point) == 1)
 	{
@@ -22,7 +22,7 @@ static 	void 	ft_draw_point(t_point *point, t_win *screen, int color)
 	}
 }
 
-static 	void 	init_param(t_point *p1, t_point *p2, double *params)
+void 	init_param(t_point *p1, t_point *p2, double *params)
 {
 	params[0] = fabs(p1->x - p2->x);
 	params[1] = ((p1->x < p2->x) * 2) - 1;
@@ -41,7 +41,7 @@ static 	void 	init_param(t_point *p1, t_point *p2, double *params)
 	params[6] = 0;
 }
 
-static	void 	ft_draw_line(t_point p1, t_point p2, t_win *screen)
+void 	ft_draw_line(t_point p1, t_point p2, t_win *screen)
 {
 	int		flag;
 	double	params[8];
@@ -51,7 +51,7 @@ static	void 	ft_draw_line(t_point p1, t_point p2, t_win *screen)
 	if (ft_out_window(&p1) || ft_out_window(&p2))
 		while (flag && !((int)p1.x == (int)p2.x && (int)p1.y == (int)p2.y))
 		{
-			ft_draw_point(&p1, screen, WHITE);
+			ft_draw_point(&p1, screen, get_color(screen, &p1, &p2, params[6]));
 			params[6] += params[5];
 			params[7] = params[4];
 			flag = 0;
@@ -70,27 +70,32 @@ static	void 	ft_draw_line(t_point p1, t_point p2, t_win *screen)
 		}
 }
 
-static 	void	ft_draw_map(t_win *scr)
+void	ft_draw_map(t_win *scr)
 {
 	int		x;
 	int		y;
 	t_point	p1;
 
 	y = 0;
+
 	while (y < scr->map->len)
 	{
 		x = 0;
-		while (x < scr->map->lines[y]->len)
+		while (x < (scr->map->lines[y]->len))
 		{
 			p1 = (*scr->map->lines[y]->points[x]);
 			if (scr->map->lines[y]->points[x + 1])
+			{
 				ft_draw_line(p1, *scr->map->lines[y]->points[x + 1], scr);
+			}
 			if (scr->map->lines[y + 1] && y + 1 < scr->map->len)
 			{
-				if (scr->map->lines[y + 1]->points[x]
-					&& x <= scr->map->lines[y + 1]->len)
+				if (scr->map->lines[y + 1]->points[x] && x <= scr->map->lines[y + 1]->len)
+				{
 					ft_draw_line(p1 , *scr->map->lines[y + 1]->points[x], scr);
+				}
 			}
+
 			x++;
 		}
 		y++;

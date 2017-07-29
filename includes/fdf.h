@@ -28,6 +28,12 @@
 ** M_PI = 3.141593
 */
 
+/*
+** Params
+*/
+
+# define THEMES 3
+
 # define WIN_W 1920
 # define WIN_H 1080
 
@@ -80,8 +86,17 @@
 # define KEY_ROT_X_D 13
 # define KEY_ROT_Y_U 0
 # define KEY_ROT_Y_D 2
-# define KEY_ROT_Z_U 14
-# define KEY_ROT_Z_D 12
+# define KEY_ROT_Z_U 12
+# define KEY_ROT_Z_D 14
+
+# define KEY_COLOR_U 47
+# define KEY_COLOR_D 43
+
+typedef struct	s_color
+{
+	int			c1;
+	int			c2;
+}				t_color;
 
 typedef struct	s_point
 {
@@ -122,7 +137,7 @@ typedef struct	s_window
 	int			endian;
 }				t_win;
 
-typedef struct	s_matrix
+typedef struct	s_matrice
 {
 	double		x1;
 	double		x2;
@@ -136,7 +151,7 @@ typedef struct	s_matrix
 	double		z2;
 	double		z3;
 	double		z4;
-}				t_matrix;
+}				t_matrice;
 
 void 	ft_error(int c, char *s);
 t_map 	*ft_parse_map(char *av, int fd, char *line);
@@ -151,16 +166,19 @@ int		ft_key_hook(int keycode, t_win *screen);
 int		ft_draw(t_win *screen);
 void 	ft_cat(t_win *win);
 
-void			calc_point(t_point *p, t_matrix *m, t_win *screen);
-void			calc_all_points(t_matrix *m, t_win *screen);
+void			calc_point(t_point *p, t_matrice *m, t_win *screen);
+void			calc_all_points(t_matrice *m, t_win *screen);
 void	calc_rotation(t_win *screen, double rot, char axis);
 void	calc_shift(t_win *screen, double x, double y, double z);
 void	calc_scale(t_win *screen, double scale);
 
-t_matrix		*matrix_rotation_x(double theta);
-t_matrix		*matrix_rotation_y(double theta);
-t_matrix		*matrix_rotation_z(double theta);
-t_matrix		*matrix_shift(double tx, double ty, double tz);
-t_matrix		*matrix_scale(double scale);
+t_matrice		*matrice_rotation_x(double theta);
+t_matrice		*matrice_rotation_y(double theta);
+t_matrice		*matrice_rotation_z(double theta);
+t_matrice		*matrice_shift(double tx, double ty, double tz);
+t_matrice		*matrice_scale(double scale);
+
+int		**choose_color(void);
+int		get_color(t_win *pic, t_point *p1, t_point *p2, double alpha);
 
 #endif
