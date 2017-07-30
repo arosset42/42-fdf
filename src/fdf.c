@@ -11,32 +11,32 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include <stdio.h>
 
-int		main(int ac, char **av)
+void 	ft_fdf(char *av)
 {
 	t_win	*screen;
 	t_map	*map;
 
-	if (ac == 2)
-	{
-		if (!(screen = (t_win *)malloc(sizeof(t_win))))
-			ft_error(4, 0);
+	if (!(screen = (t_win *)malloc(sizeof(t_win))))
+		ft_error(4, 0);
+	map = ft_parse_map(av, 0, NULL);
+	if (map->len == 0 || map->lines[0]->len == 0)
+		ft_error(3, 0);
+	screen->map = map;
+	get_center(screen);
+	screen->color = choose_color();
+	screen->cnum = 0;
+	ft_init_win(screen, WIN_W, WIN_H, "Arosset 42 FDF");
+	adapt_map(screen);
+	mlx_expose_hook(screen->win, ft_draw, screen);
+	mlx_hook(screen->win, 2, 3, ft_key_hook, screen);
+	mlx_loop(screen->mlx);
+}
 
-		map = ft_parse_map(av[1], 0, NULL);
-		if (map->len == 0 || map->lines[0]->len == 0)
-			ft_error(3, 0);
-		screen->map = map;
-		get_center(screen);
-		printf("Color\n");
-		screen->color = choose_color();
-		screen->cnum = 0;
-		ft_init_win(screen, WIN_W, WIN_H, "Arosset 42 FDF");
-		adapt_map(screen);
-		mlx_expose_hook(screen->win, ft_draw, screen);
-		mlx_hook(screen->win, 2, 3, ft_key_hook, screen);
-		mlx_loop(screen->mlx);
-	}
+int		main(int ac, char **av)
+{
+	if (ac == 2)
+		ft_fdf(av[1]);
 	else
 		ft_error(1, 0);
 	return (0);

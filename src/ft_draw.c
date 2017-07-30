@@ -6,13 +6,13 @@
 /*   By: arosset <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/29 19:22:35 by arosset           #+#    #+#             */
-/*   Updated: 2017/06/29 19:22:36 by arosset          ###   ########.fr       */
+/*   Updated: 2017/07/29 18:12:58 by arosset          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void 	ft_draw_point(t_point *point, t_win *screen, int color)
+void	ft_draw_point(t_point *point, t_win *screen, int color)
 {
 	if (ft_out_window(point) == 1)
 	{
@@ -22,7 +22,7 @@ void 	ft_draw_point(t_point *point, t_win *screen, int color)
 	}
 }
 
-void 	init_param(t_point *p1, t_point *p2, double *params)
+void	init_param(t_point *p1, t_point *p2, double *params)
 {
 	params[0] = fabs(p1->x - p2->x);
 	params[1] = ((p1->x < p2->x) * 2) - 1;
@@ -41,7 +41,7 @@ void 	init_param(t_point *p1, t_point *p2, double *params)
 	params[6] = 0;
 }
 
-void 	ft_draw_line(t_point p1, t_point p2, t_win *screen)
+void	ft_draw_line(t_point p1, t_point p2, t_win *screen)
 {
 	int		flag;
 	double	params[8];
@@ -77,7 +77,6 @@ void	ft_draw_map(t_win *scr)
 	t_point	p1;
 
 	y = 0;
-
 	while (y < scr->map->len)
 	{
 		x = 0;
@@ -85,17 +84,13 @@ void	ft_draw_map(t_win *scr)
 		{
 			p1 = (*scr->map->lines[y]->points[x]);
 			if (scr->map->lines[y]->points[x + 1])
-			{
 				ft_draw_line(p1, *scr->map->lines[y]->points[x + 1], scr);
-			}
 			if (scr->map->lines[y + 1] && y + 1 < scr->map->len)
 			{
-				if (scr->map->lines[y + 1]->points[x] && x <= scr->map->lines[y + 1]->len)
-				{
-					ft_draw_line(p1 , *scr->map->lines[y + 1]->points[x], scr);
-				}
+				if (scr->map->lines[y + 1]->points[x] &&
+					x <= scr->map->lines[y + 1]->len)
+					ft_draw_line(p1, *scr->map->lines[y + 1]->points[x], scr);
 			}
-
 			x++;
 		}
 		y++;
@@ -109,6 +104,7 @@ int		ft_draw(t_win *screen)
 		&(screen->bits), &(screen->size), &(screen->endian));
 	ft_draw_map(screen);
 	mlx_put_image_to_window(screen->mlx, screen->win, screen->img, 0, 0);
+	ft_display_info(screen);
 	mlx_destroy_image(screen->mlx, screen->img);
 	return (0);
 }

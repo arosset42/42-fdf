@@ -6,14 +6,14 @@
 /*   By: arosset <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 14:50:12 by arosset           #+#    #+#             */
-/*   Updated: 2017/06/26 14:50:14 by arosset          ###   ########.fr       */
+/*   Updated: 2017/07/29 18:16:55 by arosset          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 #include <stdio.h>
 
-static void	ft_get_min_max(t_map *map)
+void	ft_get_min_max(t_map *map)
 {
 	int		i;
 	int		j;
@@ -42,7 +42,7 @@ static void	ft_get_min_max(t_map *map)
 	}
 }
 
-static int 	ft_points(char *line, int nb_line, t_point ***array_points)
+int		ft_points(char *line, int nb_line, t_point ***array_points)
 {
 	char	**str_array;
 	t_point	*point;
@@ -69,11 +69,11 @@ static int 	ft_points(char *line, int nb_line, t_point ***array_points)
 	return (i);
 }
 
-static int 	ft_nb_line(char *av)
+int		ft_nb_line(char *av)
 {
 	int		fd;
 	int		nb_line;
-	char 	buf;
+	char	buf;
 
 	nb_line = 0;
 	if ((fd = open(av, O_RDONLY)) < 0)
@@ -81,13 +81,13 @@ static int 	ft_nb_line(char *av)
 	while (read(fd, &buf, 1))
 	{
 		if (buf == '\n')
-		nb_line++;
+			nb_line++;
 	}
 	close(fd);
 	return (nb_line);
 }
 
-t_map 	*ft_parse_map(char *av, int fd, char *line)
+t_map	*ft_parse_map(char *av, int fd, char *line)
 {
 	t_map	*map;
 	int		count;

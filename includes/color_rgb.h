@@ -32,5 +32,10 @@
 # define RGB_SCIBLUE 		0x0066CC
 # define RGB_CREAMCAN 		0xF5D85C
 
+# define RGB_BROWN 			0x994C00
+
+# define RGB_LIGHTGREEN		0x8B8989
+# define RGB_PARSLEY 		0x134F19
+# define RGB_DARKBROWN 		0x261414
 
 #endif

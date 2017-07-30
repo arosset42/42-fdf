@@ -6,7 +6,7 @@
 /*   By: arosset <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/29 19:00:42 by arosset           #+#    #+#             */
-/*   Updated: 2017/06/29 19:00:43 by arosset          ###   ########.fr       */
+/*   Updated: 2017/07/29 18:14:18 by arosset          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_key_hook_shift(int keycode, t_win *screen)
 		calc_shift(screen, MOVE_RIGHT, 0, 0);
 }
 
-void 	ft_key_hook_scale(int keycode, t_win *screen)
+void	ft_key_hook_scale(int keycode, t_win *screen)
 {
 	if (keycode == KEY_ZOOM_IN || keycode == KEY_ALT_ZOOM_IN)
 	{
