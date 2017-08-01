@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include <stdio.h>
 
 void	ft_get_min_max(t_map *map)
 {
@@ -59,10 +58,10 @@ int		ft_points(char *line, int nb_line, t_point ***array_points)
 	{
 		if (!(point = (t_point *)malloc(sizeof(t_point))))
 			ft_error(4, 0);
-		point->x = i * SIZE_W;
-		point->y = nb_line * SIZE_H;
+		point->x = (double)(i * SIZE_W);
+		point->y = (double)nb_line * SIZE_H;
 		point->color = ft_atoi(str_array[i]);
-		point->z = (point->color) * SIZE_ALT;
+		point->z = (double)(point->color) * SIZE_ALT;
 		(*array_points)[i] = point;
 		i++;
 	}
@@ -87,6 +86,19 @@ int		ft_nb_line(char *av)
 	return (nb_line);
 }
 
+void 	ft_verif_line(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != ' ' && !ft_isdigit(line[i]) && line[i] != '-')
+			ft_error(3, 0);
+		i++;
+	}
+}
+
 t_map	*ft_parse_map(char *av, int fd, char *line)
 {
 	t_map	*map;
@@ -105,6 +117,7 @@ t_map	*ft_parse_map(char *av, int fd, char *line)
 		{
 			if (!(row = (t_line *)malloc(sizeof(t_line))))
 				ft_error(4, 0);
+			ft_verif_line(line);
 			row->len = ft_points(line, count, &pts);
 			row->points = pts;
 			map->lines[count++] = row;

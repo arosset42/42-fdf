@@ -34,6 +34,5 @@ void	ft_error(int c, char *s)
 		ft_putendl_fd("Error malloc", 2);
 	if (c == 42)
 		ft_putendl_fd("Error GNL", 2);
-	ft_printf("error = %d\n", c);
 	exit(EXIT_FAILURE);
 }

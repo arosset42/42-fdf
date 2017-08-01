@@ -83,7 +83,8 @@ void	ft_draw_map(t_win *scr)
 		while (x < (scr->map->lines[y]->len))
 		{
 			p1 = (*scr->map->lines[y]->points[x]);
-			if (scr->map->lines[y]->points[x + 1])
+			if (scr->map->lines[y]->points[x + 1] &&
+				(x + 1) < (scr->map->lines[y]->len))
 				ft_draw_line(p1, *scr->map->lines[y]->points[x + 1], scr);
 			if (scr->map->lines[y + 1] && y + 1 < scr->map->len)
 			{

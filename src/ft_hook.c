@@ -89,7 +89,6 @@ int		ft_key_hook(int keycode, t_win *screen)
 	ft_key_hook_shift(keycode, screen);
 	ft_key_hook_scale(keycode, screen);
 	key_hook_color(keycode, screen);
-	ft_printf("keycode = %d\n", keycode);
 	ft_draw(screen);
 	return (1);
 }

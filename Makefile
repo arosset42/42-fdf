@@ -12,7 +12,7 @@
 NAME			= 	fdf
 
 CC				=	gcc
-FLAGS			=	-Wall -Wextra -Werror -g
+FLAGS			=	-Wall -Wextra -Werror
 
 LIB_MLX			=	./minilibx_macos
 MLX 			=	./minilibx_macos/libmlx.a
@@ -23,7 +23,7 @@ LIB_LINK		=	./libft/libft.a
 
 INC_PATH		= 	./includes
 SRC_PATH		=	./src
-SRC_NAME 		= 	fdf.c error.c parser.c ft_utility.c ft_hook.c ft_draw.c ft_calc.c ft_matrice.c color.c
+SRC_NAME 		= 	fdf.c error.c parser.c ft_utility.c ft_hook.c ft_draw.c ft_calc.c ft_matrice.c color.c ft_display.c
 OBJ_PATH		=	./obj
 
 OBJ_NAME		=	$(SRC_NAME:.c=.o)
@@ -82,4 +82,14 @@ fclean: clean
 re: fclean all
 
 
-#printf("y [%d] = %f, x [%d] = %f z = %f\n", i, screen->map->lines[i]->points[j]->y, j, screen->map->lines[i]->points[j]->x,screen->map->lines[i]->points[j]->z);
+	#VERSION_GET := $(shell sw_vers | grep "ProductVersion:" | tail -c 8 | head -c 5)
+	#SIERRA = 10.12
+	#EL_CAPITAN = 10.11
+	#MLX_S = minilibx_macos_sierra
+	#MLX_E = minilibx_macos_el_capitan
+	#MLX = minilibx_macos_el_capitan
+	#ifeq ($(VERSION_GET), $(SIERRA))
+	#	MLX = $(MLX_S)
+	#else
+	#	MLX = $(MLX_E)
+	#endif
