@@ -128,6 +128,7 @@ typedef struct	s_window
 	int			bits;
 	int			size;
 	int			endian;
+	int			scale_p;
 }				t_win;
 
 typedef struct	s_matrice
@@ -175,6 +176,7 @@ t_matrice		*matrice_scale(double scale);
 int				**choose_color(void);
 int				get_color(t_win *pic, t_point *p1, t_point *p2, double alpha);
 
-void			ft_display_info(t_win *s);
+void			ft_display_cmd(t_win *s);
+void 			ft_display_zoom(t_win *s);
 
 #endif

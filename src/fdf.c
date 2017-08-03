@@ -26,6 +26,7 @@ void 	ft_fdf(char *av)
 	get_center(screen);
 	screen->color = choose_color();
 	screen->cnum = 0;
+	screen->scale_p = 0;
 	ft_init_win(screen, WIN_W, WIN_H, "Arosset 42 FDF");
 	adapt_map(screen);
 	mlx_expose_hook(screen->win, ft_draw, screen);

@@ -105,7 +105,8 @@ int		ft_draw(t_win *screen)
 		&(screen->bits), &(screen->size), &(screen->endian));
 	ft_draw_map(screen);
 	mlx_put_image_to_window(screen->mlx, screen->win, screen->img, 0, 0);
-	ft_display_info(screen);
+	ft_display_cmd(screen);
+	ft_display_zoom(screen);
 	mlx_destroy_image(screen->mlx, screen->img);
 	return (0);
 }

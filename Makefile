@@ -23,7 +23,8 @@ LIB_LINK		=	./libft/libft.a
 
 INC_PATH		= 	./includes
 SRC_PATH		=	./src
-SRC_NAME 		= 	fdf.c error.c parser.c ft_utility.c ft_hook.c ft_draw.c ft_calc.c ft_matrice.c color.c ft_display.c
+SRC_NAME 		= 	fdf.c error.c parser.c ft_utility.c ft_hook.c ft_draw.c\
+					ft_calc.c ft_matrice.c color.c ft_display.c
 OBJ_PATH		=	./obj
 
 OBJ_NAME		=	$(SRC_NAME:.c=.o)
@@ -64,14 +65,14 @@ $(LIB):
 	@make -C $(LIB_PATH)
 	@make -C $(LIB_MLX)
 
-test: all
-	./fdf maps/42.fdf
-
 clean:
 	@rm -rf $(OBJ) $(OBJ_PATH)
 	@echo $(DELETE) : $(OBJ) $(OBJ_PATH)
 	@make -C $(LIB_PATH) clean
-	@echo $(DELETE_LIB) : Obj_Lib
+	@echo $(DELETE_LIB) : Obj Libft
+	#@make -C $(LIB_MLX) clean
+	#@echo $(DELETE_LIB) : Obj MLX
+
 
 fclean: clean
 	@rm -rf $(NAME)
@@ -80,16 +81,3 @@ fclean: clean
 	#@echo $(DELETE_LIB) : Lib
 
 re: fclean all
-
-
-	#VERSION_GET := $(shell sw_vers | grep "ProductVersion:" | tail -c 8 | head -c 5)
-	#SIERRA = 10.12
-	#EL_CAPITAN = 10.11
-	#MLX_S = minilibx_macos_sierra
-	#MLX_E = minilibx_macos_el_capitan
-	#MLX = minilibx_macos_el_capitan
-	#ifeq ($(VERSION_GET), $(SIERRA))
-	#	MLX = $(MLX_S)
-	#else
-	#	MLX = $(MLX_E)
-	#endif

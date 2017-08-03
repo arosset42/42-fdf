@@ -48,7 +48,10 @@ void	ft_key_hook_scale(int keycode, t_win *screen)
 		if (screen->scale < LIMIT_ZOOM_IN)
 			calc_scale(screen, MOVE_ZOOM_IN);
 		else
+		{
 			screen->scale /= MOVE_ZOOM_IN;
+			screen->scale_p = 1;
+		}
 	}
 	else if (keycode == KEY_ZOOM_OUT || keycode == KEY_ALT_ZOOM_OUT)
 	{
@@ -56,7 +59,10 @@ void	ft_key_hook_scale(int keycode, t_win *screen)
 		if (screen->scale > LIMIT_ZOOM_OUT)
 			calc_scale(screen, MOVE_ZOOM_OUT);
 		else
+		{
 			screen->scale /= MOVE_ZOOM_OUT;
+			screen->scale_p = 2;
+		}
 	}
 }
 
@@ -78,17 +84,18 @@ void	key_hook_color(int keycode, t_win *screen)
 	}
 }
 
-int		ft_key_hook(int keycode, t_win *screen)
+int		ft_key_hook(int keycode, t_win *s)
 {
 	if (keycode == KEY_ESC)
 	{
-		mlx_destroy_window(screen->mlx, screen->win);
+		mlx_destroy_window(s->mlx, s->win);
 		exit(EXIT_FAILURE);
 	}
-	ft_key_hook_rotation(keycode, screen);
-	ft_key_hook_shift(keycode, screen);
-	ft_key_hook_scale(keycode, screen);
-	key_hook_color(keycode, screen);
-	ft_draw(screen);
+	ft_key_hook_rotation(keycode, s);
+	ft_key_hook_shift(keycode, s);
+	ft_key_hook_scale(keycode, s);
+	key_hook_color(keycode, s);
+	ft_draw(s);
+	mlx_string_put(s->mlx, s->win, 160, 365, RGB_WHITE, ft_itoa(keycode));
 	return (1);
 }

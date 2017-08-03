@@ -35,23 +35,12 @@ int		find_color(t_color *spectrum, int z, double min, double max)
 	return (color);
 }
 
-int 	ft_ign_color()
-{
-
-	return (RGB_WHITE);
-}
-
 int		get_color(t_win *pic, t_point *p1, t_point *p2, double alpha)
 {
 	t_color	c;
 	int		color;
 
-	if (pic->cnum == 3)
-	{
-		color = ft_ign_color();
-		return (color);
-	}
-	else if (ft_out_window(p1) == 1)
+	if (ft_out_window(p1) == 1)
 	{
 		color = (p1->color * (1 - alpha)) + (p2->color * alpha);
 		if (color < pic->map->min || color > pic->map->max)
@@ -88,10 +77,10 @@ int		**choose_color(void)
 	int		**color;
 
 	color = malloc(sizeof(int *) * THEMES);
-	color[0] = put_color(RGB_BLUE, RGB_LIME, RGB_RED);
-	color[1] = put_color(RGB_BLACK, RGB_GRAY, RGB_WHITE);
-	color[2] = put_color(RGB_SCIBLUE, RGB_DEEPSKYBLUE, RGB_CREAMCAN);
-	color[3] = put_color(RGB_BLUE, RGB_BROWN, RGB_WHITE);
-	color[4] = put_color(RGB_PARSLEY, RGB_DARKBROWN, RGB_LIGHTGREEN);
+	color[0] = put_color(RGB_WHITE, RGB_WHITE, RGB_WHITE);
+	color[1] = put_color(RGB_BLUE, RGB_LIME, RGB_RED);
+	color[2] = put_color(RGB_BLUE, RGB_YELLOW, RGB_WHITE);
+	color[3] = put_color(RGB_SCIBLUE, RGB_DEEPSKYBLUE, RGB_CREAMCAN);
+	color[4] = put_color(RGB_BLUE, RGB_BROWN, RGB_WHITE);
 	return (color);
 }
