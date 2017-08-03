@@ -12,6 +12,7 @@
 
 #include "../includes/fdf.h"
 
+
 void 	ft_fdf(char *av)
 {
 	t_win	*screen;

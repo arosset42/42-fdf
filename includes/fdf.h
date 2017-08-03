@@ -30,8 +30,8 @@
 # define WIN_W 1980
 # define WIN_H 1080
 
-# define SIZE_W 10
-# define SIZE_H 10
+# define SIZE_W 100
+# define SIZE_H 100
 # define SIZE_ALT 5
 
 /*
@@ -49,7 +49,7 @@
 # define MOVE_ZOOM_IN (SCALE + ZOOM_AMOUNT)
 # define MOVE_ZOOM_OUT (SCALE - ZOOM_AMOUNT)
 # define LIMIT_ZOOM_IN 20.0
-# define LIMIT_ZOOM_OUT 0.015
+# define LIMIT_ZOOM_OUT 0.008
 
 # define ROT_DEGREE 90
 # define MOVE_ROT_X_U -M_PI / ROT_DEGREE
