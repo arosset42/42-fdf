@@ -35,6 +35,7 @@ void 	ft_display_zoom(t_win *s)
 	return;
 }
 
+<<<<<<< HEAD
 void 	ft_display_info(t_win *s, int x, int y)
 {
 	s->footer = mlx_xpm_file_to_image(s->mlx, "42_MS_2.xpm", &x, &y);
@@ -43,15 +44,26 @@ void 	ft_display_info(t_win *s, int x, int y)
 	mlx_string_put(s->mlx, s->win, 94, WIN_H - 25,
 		RGB_WHITE, ft_itoa(s->map->min));
 	mlx_string_put(s->mlx, s->win, 10, WIN_H - 45, RGB_GREEN, "MAX   : ");
+=======
+void 	ft_display_info(t_win *s)
+{
+	mlx_string_put(s->mlx, s->win, 10, WIN_H - 25, RGB_WHITE, "MIN   : ");
+	mlx_string_put(s->mlx, s->win, 94, WIN_H - 25,
+		RGB_WHITE, ft_itoa(s->map->min));
+	mlx_string_put(s->mlx, s->win, 10, WIN_H - 45, RGB_WHITE, "MAX   : ");
+>>>>>>> 59965ebca67bba18ac369d92536915d870bd8440
 	mlx_string_put(s->mlx, s->win, 94, WIN_H - 45,
 		RGB_WHITE, ft_itoa(s->map->max));
 	mlx_string_put(s->mlx, s->win, 150, WIN_H - 25,
 		RGB_YELLOW, "Theme : ");
 	mlx_string_put(s->mlx, s->win, 230, WIN_H - 25,
 		s->color[s->cnum][1], ft_theme(s->cnum));
+<<<<<<< HEAD
 	mlx_string_put(s->mlx, s->win, 370, WIN_H - 25, RGB_PURPLE, "MAP :");
 	mlx_string_put(s->mlx, s->win, 430, WIN_H - 25, RGB_WHITE, s->name_map);
 
+=======
+>>>>>>> 59965ebca67bba18ac369d92536915d870bd8440
 }
 
 void 	ft_display_cmd(t_win *s)
@@ -72,5 +84,9 @@ void 	ft_display_cmd(t_win *s)
 	mlx_string_put(s->mlx, s->win, 20, 285, RGB_WHITE, "Out : -");
 	mlx_string_put(s->mlx, s->win, 10, 345, RGB_YELLOW, "Esc to exit");
 	mlx_string_put(s->mlx, s->win, 10, 365, RGB_WHITE, "Last Keycode :");
+<<<<<<< HEAD
 	ft_display_info(s, 0, 0);
+=======
+	ft_display_info(s);
+>>>>>>> 59965ebca67bba18ac369d92536915d870bd8440
 }
