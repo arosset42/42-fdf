@@ -6,18 +6,18 @@
 /*   By: arosset <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 14:44:06 by arosset           #+#    #+#             */
-/*   Updated: 2017/06/26 14:44:07 by arosset          ###   ########.fr       */
+/*   Updated: 2017/07/29 18:11:35 by arosset          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static void 	ft_usage(void)
+void	ft_usage(void)
 {
 	ft_putendl_fd("usage: ./fdf source_file.fdf", 2);
 }
 
-void 	ft_error(int c, char *s)
+void	ft_error(int c, char *s)
 {
 	if (c == 1)
 		ft_usage();
@@ -34,6 +34,5 @@ void 	ft_error(int c, char *s)
 		ft_putendl_fd("Error malloc", 2);
 	if (c == 42)
 		ft_putendl_fd("Error GNL", 2);
-	ft_printf("error = %d\n", c);
 	exit(EXIT_FAILURE);
 }

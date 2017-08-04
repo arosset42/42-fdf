@@ -12,7 +12,7 @@
 NAME			= 	fdf
 
 CC				=	gcc
-FLAGS			=	-Wall -Wextra -Werror -g
+FLAGS			=	-Wall -Wextra -Werror
 
 LIB_MLX			=	./minilibx_macos
 MLX 			=	./minilibx_macos/libmlx.a
@@ -23,7 +23,8 @@ LIB_LINK		=	./libft/libft.a
 
 INC_PATH		= 	./includes
 SRC_PATH		=	./src
-SRC_NAME 		= 	fdf.c error.c parser.c ft_utility.c ft_hook.c ft_draw.c
+SRC_NAME 		= 	fdf.c error.c parser.c ft_utility.c ft_hook.c ft_draw.c\
+					ft_calc.c ft_matrice.c color.c ft_display.c
 OBJ_PATH		=	./obj
 
 OBJ_NAME		=	$(SRC_NAME:.c=.o)
@@ -64,13 +65,14 @@ $(LIB):
 	@make -C $(LIB_PATH)
 	@make -C $(LIB_MLX)
 
-
-
 clean:
 	@rm -rf $(OBJ) $(OBJ_PATH)
 	@echo $(DELETE) : $(OBJ) $(OBJ_PATH)
 	@make -C $(LIB_PATH) clean
-	@echo $(DELETE_LIB) : Obj_Lib
+	@echo $(DELETE_LIB) : Obj Libft
+	#@make -C $(LIB_MLX) clean
+	#@echo $(DELETE_LIB) : Obj MLX
+
 
 fclean: clean
 	@rm -rf $(NAME)
@@ -79,6 +81,3 @@ fclean: clean
 	#@echo $(DELETE_LIB) : Lib
 
 re: fclean all
-
-
-#printf("y [%d] = %f, x [%d] = %f z = %f\n", i, screen->map->lines[i]->points[j]->y, j, screen->map->lines[i]->points[j]->x,screen->map->lines[i]->points[j]->z);

@@ -6,14 +6,13 @@
 /*   By: arosset <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 14:50:12 by arosset           #+#    #+#             */
-/*   Updated: 2017/06/26 14:50:14 by arosset          ###   ########.fr       */
+/*   Updated: 2017/07/29 18:16:55 by arosset          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include <stdio.h>
 
-static void	ft_get_min_max(t_map *map)
+void	ft_get_min_max(t_map *map)
 {
 	int		i;
 	int		j;
@@ -42,7 +41,7 @@ static void	ft_get_min_max(t_map *map)
 	}
 }
 
-static int 	ft_points(char *line, int nb_line, t_point ***array_points)
+int		ft_points(char *line, int nb_line, t_point ***array_points)
 {
 	char	**str_array;
 	t_point	*point;
@@ -59,21 +58,21 @@ static int 	ft_points(char *line, int nb_line, t_point ***array_points)
 	{
 		if (!(point = (t_point *)malloc(sizeof(t_point))))
 			ft_error(4, 0);
-		point->x = i * SIZE_W;
-		point->y = nb_line * SIZE_H;
+		point->x = (double)(i * SIZE_W);
+		point->y = (double)nb_line * SIZE_H;
 		point->color = ft_atoi(str_array[i]);
-		point->z = (point->color) * SIZE_ALT;
+		point->z = (double)(point->color) * SIZE_ALT;
 		(*array_points)[i] = point;
 		i++;
 	}
 	return (i);
 }
 
-static int 	ft_nb_line(char *av)
+int		ft_nb_line(char *av)
 {
 	int		fd;
 	int		nb_line;
-	char 	buf;
+	char	buf;
 
 	nb_line = 0;
 	if ((fd = open(av, O_RDONLY)) < 0)
@@ -81,13 +80,26 @@ static int 	ft_nb_line(char *av)
 	while (read(fd, &buf, 1))
 	{
 		if (buf == '\n')
-		nb_line++;
+			nb_line++;
 	}
 	close(fd);
 	return (nb_line);
 }
 
-t_map 	*ft_parse_map(char *av, int fd, char *line)
+void 	ft_verif_line(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != ' ' && !ft_isdigit(line[i]) && line[i] != '-')
+			ft_error(3, 0);
+		i++;
+	}
+}
+
+t_map	*ft_parse_map(char *av, int fd, char *line)
 {
 	t_map	*map;
 	int		count;
@@ -105,6 +117,7 @@ t_map 	*ft_parse_map(char *av, int fd, char *line)
 		{
 			if (!(row = (t_line *)malloc(sizeof(t_line))))
 				ft_error(4, 0);
+			ft_verif_line(line);
 			row->len = ft_points(line, count, &pts);
 			row->points = pts;
 			map->lines[count++] = row;

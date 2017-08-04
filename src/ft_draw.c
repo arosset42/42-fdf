@@ -6,77 +6,107 @@
 /*   By: arosset <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/29 19:22:35 by arosset           #+#    #+#             */
-/*   Updated: 2017/06/29 19:22:36 by arosset          ###   ########.fr       */
+/*   Updated: 2017/07/29 18:12:58 by arosset          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void 	ft_modif_pts(t_point *pts)
+void	ft_draw_point(t_point *point, t_win *screen, int color)
 {
-	double		tmp_x;
-	double		tmp_y;
-
-	tmp_x = (sqrt(2) / 2) * (pts->x - pts->y);
-	tmp_y = ((0.82 * pts->z) - (1 / sqrt(6)) * (pts->x + pts->y));
-
-	pts->x = tmp_x;
-	pts->y = tmp_y;
-}
-
-int		ft_draw_line(t_point *p1, t_point *p2, t_win *screen)
-{
-	double 		x;
-	double		tmp_x;
-	double		tmp_y;
-	int		dec;
-
-	dec = 500;
-
-	tmp_x = (sqrt(2) / 2) * (p2->x - p2->y);
-	tmp_y = ((0.82 * p2->z) - (1 / sqrt(6)) * (p2->x + p2->y));
-	x = p1->x;
-	printf("\033[33m x1 = %f, y1 =%f z1 = %f ",p1->x ,p1->y, p1->z );
-	printf("\033[32m x2 = %f, y2 =%f z2 = %f \033[00m",p2->x ,p2->y, p2->z );
-	printf("\033[31m x2 = %f, y2 =%f z2 = %f \033[00m\n",tmp_x ,tmp_y, p2->z );
-
-	while (x <= tmp_x)
+	if (ft_out_window(point) == 1)
 	{
-		mlx_pixel_put(screen->mlx, screen->win, x + dec , p1->y + ((tmp_y - p1->y) * (x - p1->x)) / (tmp_x - x) + dec, 0xFFFFFF);
-		x++;
+		ft_memcpy(&(screen->img_addr[((int)(point->x) * 4) +
+			((int)(point->y) * screen->size)]),
+			&(color), (size_t)(sizeof(int)));
 	}
-
 }
 
-void 	ft_draw(t_win *screen)
+void	init_param(t_point *p1, t_point *p2, double *params)
 {
-	int		i;
-	int		j;
-	int		dec;
+	params[0] = fabs(p1->x - p2->x);
+	params[1] = ((p1->x < p2->x) * 2) - 1;
+	params[2] = fabs(p1->y - p2->y);
+	params[3] = ((p1->y < p2->y) * 2) - 1;
+	if (params[0] > params[2])
+		params[4] = params[0] * 0.5;
+	else
+		params[4] = -params[2] * 0.5;
+	if (ft_max(params[0], params[2]) > 1)
+		params[5] = 1 / (double)(ft_max(params[0], params[2]) - 1);
+	else if (ft_max(params[0], params[2]) == 1)
+		params[5] = 1;
+	else
+		params[5] = 0;
+	params[6] = 0;
+}
 
-	dec = 500;
-	i = 0;
-	while (i < screen->map->len)
-	{
-		j = 0;
-		while (j < screen->map->lines[i]->len - 1)
+void	ft_draw_line(t_point p1, t_point p2, t_win *screen)
+{
+	int		flag;
+	double	params[8];
+
+	init_param(&p1, &p2, params);
+	flag = 1;
+	if (ft_out_window(&p1) || ft_out_window(&p2))
+		while (flag && !((int)p1.x == (int)p2.x && (int)p1.y == (int)p2.y))
 		{
-			if (screen->map->lines[i]->points[j]->z > 0)
-				printf("\033[31mx = %f, y =%f z = %f\033[00m ",screen->map->lines[i]->points[j]->x ,screen->map->lines[i]->points[j]->y, screen->map->lines[i]->points[j]->z );
-			else
-				printf("x = %f, y =%f z = %f ",screen->map->lines[i]->points[j]->x ,screen->map->lines[i]->points[j]->y, screen->map->lines[i]->points[j]->z );
-			ft_modif_pts(screen->map->lines[i]->points[j]);
-			printf("xi = %f, yi =%f \n",screen->map->lines[i]->points[j]->x ,screen->map->lines[i]->points[j]->y );
-			if (screen->map->lines[i]->points[j]->z > 0)
-				mlx_pixel_put(screen->mlx, screen->win, screen->map->lines[i]->points[j]->x + dec, screen->map->lines[i]->points[j]->y + dec, 0xFB3D3D);
-			else
-				mlx_pixel_put(screen->mlx, screen->win, screen->map->lines[i]->points[j]->x  +dec, screen->map->lines[i]->points[j]->y + dec, 0xFFFFFF);
-			if (screen->map->lines[i]->points[j + 1])
-				ft_draw_line(screen->map->lines[i]->points[j], screen->map->lines[i]->points[j + 1] ,screen);
-			//ft_draw_line(screen->map->lines[i]->points[j]->x + screen->dx, screen->map->lines[i]->points[j]->y + screen->dy,
-				//			screen->map->lines[i + 1]->points[j]->x + screen->dx, screen->map->lines[i + 1]->points[j]->y + screen->dy, screen);
-			j++;
+			ft_draw_point(&p1, screen, get_color(screen, &p1, &p2, params[6]));
+			params[6] += params[5];
+			params[7] = params[4];
+			flag = 0;
+			if (params[7] > -params[0] && (int)p1.x != (int)p2.x)
+			{
+				params[4] -= params[2];
+				p1.x += params[1];
+				flag = 1;
+			}
+			if (params[7] < params[2] && (int)p1.y != (int)p2.y)
+			{
+				params[4] += params[0];
+				p1.y += params[3];
+				flag = 1;
+			}
 		}
-		i++;
+}
+
+void	ft_draw_map(t_win *scr)
+{
+	int		x;
+	int		y;
+	t_point	p1;
+
+	y = 0;
+	while (y < scr->map->len)
+	{
+		x = 0;
+		while (x < (scr->map->lines[y]->len))
+		{
+			p1 = (*scr->map->lines[y]->points[x]);
+			if (scr->map->lines[y]->points[x + 1] &&
+				(x + 1) < (scr->map->lines[y]->len))
+				ft_draw_line(p1, *scr->map->lines[y]->points[x + 1], scr);
+			if (scr->map->lines[y + 1] && y + 1 < scr->map->len)
+			{
+				if (scr->map->lines[y + 1]->points[x] &&
+					x <= scr->map->lines[y + 1]->len)
+					ft_draw_line(p1, *scr->map->lines[y + 1]->points[x], scr);
+			}
+			x++;
+		}
+		y++;
 	}
+}
+
+int		ft_draw(t_win *screen)
+{
+	screen->img = mlx_new_image(screen->mlx, WIN_W + 100, WIN_H + 100);
+	screen->img_addr = mlx_get_data_addr(screen->img,
+		&(screen->bits), &(screen->size), &(screen->endian));
+	ft_draw_map(screen);
+	mlx_put_image_to_window(screen->mlx, screen->win, screen->img, 0, 0);
+	ft_display_cmd(screen);
+	ft_display_zoom(screen);
+	mlx_destroy_image(screen->mlx, screen->img);
+	return (0);
 }
