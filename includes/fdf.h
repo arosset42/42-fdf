@@ -26,7 +26,6 @@
 */
 
 # define THEMES 5
-<<<<<<< HEAD
 
 # define WIN_W 1280
 # define WIN_H 700
@@ -66,47 +65,6 @@
 
 # define KEY_ESC 53
 
-=======
-
-# define WIN_W 1980
-# define WIN_H 1080
-
-# define SIZE_W 100
-# define SIZE_H 100
-# define SIZE_ALT 5
-
-/*
-** Deplacement
-*/
-
-# define SHIFT_DIST 10
-# define MOVE_UP -SHIFT_DIST
-# define MOVE_DOWN SHIFT_DIST
-# define MOVE_LEFT -SHIFT_DIST
-# define MOVE_RIGHT SHIFT_DIST
-
-# define ZOOM_AMOUNT 0.1
-# define SCALE 1.0
-# define MOVE_ZOOM_IN (SCALE + ZOOM_AMOUNT)
-# define MOVE_ZOOM_OUT (SCALE - ZOOM_AMOUNT)
-# define LIMIT_ZOOM_IN 20.0
-# define LIMIT_ZOOM_OUT 0.008
-
-# define ROT_DEGREE 90
-# define MOVE_ROT_X_U -M_PI / ROT_DEGREE
-# define MOVE_ROT_X_D M_PI / ROT_DEGREE
-# define MOVE_ROT_Y_U -M_PI / ROT_DEGREE
-# define MOVE_ROT_Y_D M_PI / ROT_DEGREE
-# define MOVE_ROT_Z_U -M_PI / ROT_DEGREE
-# define MOVE_ROT_Z_D M_PI / ROT_DEGREE
-
-/*
-** KEYCODE
-*/
-
-# define KEY_ESC 53
-
->>>>>>> 59965ebca67bba18ac369d92536915d870bd8440
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 # define KEY_DOWN 125
@@ -162,10 +120,7 @@ typedef struct	s_window
 	void		*win;
 	t_map		*map;
 	void		*img;
-<<<<<<< HEAD
 	void 		*footer;
-=======
->>>>>>> 59965ebca67bba18ac369d92536915d870bd8440
 	t_point		center;
 	int			**color;
 	int			cnum;
@@ -175,10 +130,7 @@ typedef struct	s_window
 	int			size;
 	int			endian;
 	int			scale_p;
-<<<<<<< HEAD
 	char 		*name_map;
-=======
->>>>>>> 59965ebca67bba18ac369d92536915d870bd8440
 }				t_win;
 
 typedef struct	s_matrice

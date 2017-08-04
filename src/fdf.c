@@ -20,10 +20,7 @@ void 	ft_fdf(char *av)
 
 	if (!(screen = (t_win *)malloc(sizeof(t_win))))
 		ft_error(4, 0);
-<<<<<<< HEAD
 	screen->name_map = av;
-=======
->>>>>>> 59965ebca67bba18ac369d92536915d870bd8440
 	map = ft_parse_map(av, 0, NULL);
 	if (map->len == 0 || map->lines[0]->len == 0)
 		ft_error(3, 0);
