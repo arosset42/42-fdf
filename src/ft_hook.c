@@ -96,6 +96,6 @@ int		ft_key_hook(int keycode, t_win *s)
 	ft_key_hook_scale(keycode, s);
 	key_hook_color(keycode, s);
 	ft_draw(s);
-	mlx_string_put(s->mlx, s->win, 160, 365, RGB_WHITE, ft_itoa(keycode));
+	mlx_string_put(s->mlx, s->win, 1145, WIN_H - 25, RGB_WHITE, ft_itoa(keycode));
 	return (1);
 }

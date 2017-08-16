@@ -82,5 +82,6 @@ int		**choose_color(void)
 	color[2] = put_color(RGB_BLUE, RGB_YELLOW, RGB_WHITE);
 	color[3] = put_color(RGB_SCIBLUE, RGB_DEEPSKYBLUE, RGB_CREAMCAN);
 	color[4] = put_color(RGB_BLUE, RGB_BROWN, RGB_WHITE);
+	color[5] = put_color(RGB_BLUE, RGB_LIME, RGB_LIME);
 	return (color);
 }

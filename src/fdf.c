@@ -41,6 +41,6 @@ int		main(int ac, char **av)
 	if (ac == 2)
 		ft_fdf(av[1]);
 	else
-		ft_error(1, 0);
+		ft_error(1, ft_itoa(ac));
 	return (0);
 }

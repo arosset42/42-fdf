@@ -53,7 +53,7 @@ all: $(LIB) $(NAME)
 
 $(NAME): $(OBJ)
 	@$(CC) $(LIB_LINK) $(FLAGS) $(OBJ) $(MLX) -framework OpenGL -framework AppKit -o $@
-	@echo $(RED)"Exec =>"$(YELLOW) $(NAME) : $(SUCCESS)
+	@echo "Exec =>"$(YELLOW) $(NAME) $(RESET): $(SUCCESS)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true

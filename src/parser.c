@@ -86,7 +86,7 @@ int		ft_nb_line(char *av)
 	return (nb_line);
 }
 
-void 	ft_verif_line(char *line)
+void 	ft_verif_line(char *line, char *av)
 {
 	int i;
 
@@ -94,7 +94,7 @@ void 	ft_verif_line(char *line)
 	while (line[i])
 	{
 		if (line[i] != ' ' && !ft_isdigit(line[i]) && line[i] != '-')
-			ft_error(3, 0);
+			ft_error(3, av);
 		i++;
 	}
 }
@@ -117,7 +117,7 @@ t_map	*ft_parse_map(char *av, int fd, char *line)
 		{
 			if (!(row = (t_line *)malloc(sizeof(t_line))))
 				ft_error(4, 0);
-			ft_verif_line(line);
+			ft_verif_line(line, av);
 			row->len = ft_points(line, count, &pts);
 			row->points = pts;
 			map->lines[count++] = row;

@@ -22,7 +22,9 @@ char	*ft_theme(int i)
 		return ("Blue to White");
 	if (i == 3)
 		return ("Island");
-	return ("Moutain");
+	if (i == 4)
+		return ("Moutain");
+	return ("Lime");
 }
 
 void 	ft_display_zoom(t_win *s)
@@ -35,10 +37,16 @@ void 	ft_display_zoom(t_win *s)
 	return;
 }
 
-void 	ft_display_info(t_win *s, int x, int y)
+void 	ft_display_footer(t_win *s, int x, int y)
 {
 	s->footer = mlx_xpm_file_to_image(s->mlx, "42_MS_2.xpm", &x, &y);
 	mlx_put_image_to_window(s->mlx, s->win, s->footer, WIN_W - 100, WIN_H - 100);
+}
+
+void 	ft_display_info(t_win *s)
+{
+	ft_display_footer(s, 0, 0);
+	mlx_string_put(s->mlx, s->win, 10, WIN_H - 65, RGB_GREEN, "Altitude");
 	mlx_string_put(s->mlx, s->win, 10, WIN_H - 25, RGB_GREEN, "MIN   : ");
 	mlx_string_put(s->mlx, s->win, 94, WIN_H - 25,
 		RGB_WHITE, ft_itoa(s->map->min));
@@ -71,6 +79,6 @@ void 	ft_display_cmd(t_win *s)
 	mlx_string_put(s->mlx, s->win, 20, 265, RGB_WHITE, "In  : +");
 	mlx_string_put(s->mlx, s->win, 20, 285, RGB_WHITE, "Out : -");
 	mlx_string_put(s->mlx, s->win, 10, 345, RGB_YELLOW, "Esc to exit");
-	mlx_string_put(s->mlx, s->win, 10, 365, RGB_WHITE, "Last Keycode :");
-	ft_display_info(s, 0, 0);
+	mlx_string_put(s->mlx, s->win, 1000, WIN_H - 25, RGB_WHITE, "Last Keycode :");
+	ft_display_info(s);
 }

@@ -25,7 +25,7 @@
 ** Params
 */
 
-# define THEMES 5
+# define THEMES 6
 
 # define WIN_W 1280
 # define WIN_H 700
