@@ -70,14 +70,14 @@ clean:
 	@echo $(DELETE) : $(OBJ) $(OBJ_PATH)
 	@make -C $(LIB_PATH) clean
 	@echo $(DELETE_LIB) : Obj Libft
-	#@make -C $(LIB_MLX) clean
-	#@echo $(DELETE_LIB) : Obj MLX
+	@make -C $(LIB_MLX) clean
+	@echo $(DELETE_LIB) : Obj MLX
 
 
 fclean: clean
 	@rm -rf $(NAME)
 	@echo $(DELETE) : $(NAME)
-	#@make -C $(LIB_PATH) fclean
-	#@echo $(DELETE_LIB) : Lib
+	@make -C $(LIB_PATH) fclean
+	@echo $(DELETE_LIB) : Lib
 
 re: fclean all

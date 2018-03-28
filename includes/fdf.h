@@ -30,8 +30,8 @@
 # define WIN_W 1280
 # define WIN_H 700
 
-# define SIZE_W 50
-# define SIZE_H 50
+# define SIZE_W 250
+# define SIZE_H 250
 # define SIZE_ALT 5
 
 /*
